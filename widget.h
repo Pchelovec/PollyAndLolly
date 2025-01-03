@@ -18,8 +18,6 @@ public:
     void drawScene0(QPaintEvent *event);
 
 private slots:
-    void on_pushButton_clicked();
-
     void on_label_clicked();
 
 private:
@@ -29,13 +27,7 @@ private:
     // QWidget interface
 protected:
     void paintEvent(QPaintEvent *event);
-
-    // QWidget interface
-protected:
     void resizeEvent(QResizeEvent *event);
-
-    // QWidget interface
-protected:
     void mousePressEvent(QMouseEvent *event);
 };
 

@@ -19,23 +19,10 @@ Widget::~Widget()
     delete ui;
 }
 
-void Widget::on_pushButton_clicked()
-{
-//    game->drawMeScene(new GameTask());
-//    GameTask *task = new GameTask();
-//    task->level=Level::prolog;
-//    task->scene=Scene::StartMenuScreen_level0;
-//    task->screenSize=size();
-//    ui->label->setPixmap(game->drawMeScene(task));
-}
-
 void Widget::drawScene0(QPaintEvent *pe)
 {
     GameTask *gameTask =new GameTask(Level::prolog,Scene::StartMenuScreen_level0);
         gameTask->screenSize=QSize(width(),height());
-
-//        game->debugScene(gameTask);
-//        game->debugScene(gameTask);
 
     QPainter paint(this);
     QPixmap pixmap = game->drawMeScene(gameTask);
@@ -45,10 +32,8 @@ void Widget::drawScene0(QPaintEvent *pe)
 
 void Widget::paintEvent(QPaintEvent *event)
 {
-    qDebug()<<"!";
-
     if (game->changed){
-        qDebug()<<"please set scene!";
+        qDebug()<<"Widget paint for changed screen!";
         drawScene0(event);
     }
     game->changed=false;
