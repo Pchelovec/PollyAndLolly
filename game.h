@@ -13,11 +13,20 @@ public:
     explicit Game(QObject *parent = nullptr);
     State *state;
     QPixmap drawMeScene(GameTask *task);
+    void debugScene(GameTask *task);
+    bool changed;
+    QPixmap getTestImg(int w,int h);
+
 
 private:
     QPixmap firstBackground;
     QPixmap polly;
-    QPixmap getBacgroundMainScene(int w,int h);
+    QPixmap getBacgroundMainScene(QSize screen_size);
+    QPixmap getSheepLolly(QSize screen_size);
+
+    void taskInfo(GameTask * task);
+    QPixmap drawScene0Prolog(GameTask *task);
+    QPixmap drawTempalteSceneByTask(GameTask *task);
 };
 
 #endif // GAME_H

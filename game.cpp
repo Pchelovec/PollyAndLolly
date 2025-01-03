@@ -16,6 +16,11 @@ QPixmap Game::getBacgroundMainScene(int w,int h)
     return firstBackground.scaled(w,h);
 }
 
+QPixmap Game::getSheepLolly(int w, int h)
+{
+    return polly.scaled(w,h);
+}
+
 //************************************************
 //TODO fix for QWidget
 //QWidget *w = new QWidget();
@@ -29,6 +34,7 @@ QPixmap Game::drawMeScene(GameTask *task)
     QPainter paint;
     QPixmap pixmap = getBacgroundMainScene(600,800);
     paint.drawPixmap(0, 0, pixmap);
+    paint.drawPixmap(0,0,getSheepLolly(600,800));
 
     //step 2 - show pixmap
     QLabel *l = new QLabel;

@@ -29,13 +29,16 @@ SOURCES += \
         widget.cpp \
     game.cpp \
     state.cpp \
-    gametask.cpp
+    gametask.cpp \
+    clickablelabel.cpp
 
 HEADERS += \
         widget.h \
     game.h \
     state.h \
-    gametask.h
+    gametask.h \
+    level.h \
+    clickablelabel.h
 
 FORMS += \
         widget.ui

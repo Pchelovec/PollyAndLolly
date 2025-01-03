@@ -15,12 +15,28 @@ public:
     explicit Widget(QWidget *parent = nullptr);
     ~Widget();
 
+    void drawScene0(QPaintEvent *event);
+
 private slots:
     void on_pushButton_clicked();
+
+    void on_label_clicked();
 
 private:
     Ui::Widget *ui;
     Game *game;
+
+    // QWidget interface
+protected:
+    void paintEvent(QPaintEvent *event);
+
+    // QWidget interface
+protected:
+    void resizeEvent(QResizeEvent *event);
+
+    // QWidget interface
+protected:
+    void mousePressEvent(QMouseEvent *event);
 };
 
 #endif // WIDGET_H
