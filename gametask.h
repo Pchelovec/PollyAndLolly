@@ -9,9 +9,9 @@ class GameTask : public QObject
     Q_OBJECT
 public:
     explicit GameTask(QObject *parent = nullptr);
-    GameTask(Level l,Scene s);
+    GameTask(Level l,Prolog_scene s);
     Level level;
-    Scene scene;
+    Prolog_scene scene;
     QSize screenSize;
 
 private:

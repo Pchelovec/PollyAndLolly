@@ -24,6 +24,8 @@ private:
     Ui::Widget *ui;
     Game *game;
 
+    void setSceneByNewTask(GameTask * gameTask);
+
     // QWidget interface
 protected:
     void paintEvent(QPaintEvent *event);

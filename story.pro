@@ -38,7 +38,8 @@ HEADERS += \
     state.h \
     gametask.h \
     level.h \
-    clickablelabel.h
+    clickablelabel.h \
+    textedstory.h
 
 FORMS += \
         widget.ui
