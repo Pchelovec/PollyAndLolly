@@ -1,5 +1,6 @@
 #include "game.h"
 #include"textedstory.h"
+#include"patched_game_painter.h"
 #include <QWidget>
 #include <QPainter>
 #include<QPixmap>
@@ -9,9 +10,13 @@ Game::Game(QObject *parent) : QObject(parent)
 {
     lastPainted=new State();
 
+    //load main backgrounds
     firstBackground.load(":/common/img/background0.png");
+
+    //load main persons
     polly.load(":/sheep/img/sheeps/Polly.png");
     lolly.load(":/sheep/img/sheeps/Lolly.png");
+    trolly.load(":/sheep/img/Sheeps/Trolly.png");
 }
 
 QPixmap Game::getBacgroundMainScene(QSize screen_size)
@@ -39,39 +44,37 @@ void Game::taskInfo(GameTask *task)
 
 QPixmap* Game::drawScene0_Prolog(GameTask *task)
 {
-    QPixmap *pixmap=new QPixmap(task->screenSize);
-    pixmap->fill(Qt::transparent);
-    QPainter *painter=new QPainter(pixmap);
-    painter->drawPixmap(0, 0,getBacgroundMainScene(task->screenSize));
-
+    //prepare extra screenSize calculation
     QSize pollyScreen=QSize((task->screenSize.width()/4),task->screenSize.height()/4);
-    painter->drawPixmap(0, (task->screenSize.height()/4)*3, getSheepPolly(pollyScreen));
-    painter->end();
-    return pixmap;
+
+    //draw
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getBacgroundMainScene(task->screenSize));
+    gamePainter->draw(0, (task->screenSize.height()/4)*3, getSheepPolly(pollyScreen));
+    return gamePainter->process();
 }
 
 QPixmap* Game::getSingleLolly(GameTask* task){
-    QPixmap *pixmap=new QPixmap(task->screenSize);
-    pixmap->fill(Qt::transparent);
-    QPainter *painter=new QPainter(pixmap);
-
+    //prepare extra screenSize calculation
     QSize pollyScreen=QSize((task->screenSize.width()/4),task->screenSize.height()/4);
-    painter->drawPixmap(0, 0, getSheepPolly(pollyScreen));
-    painter->end();
-    return pixmap;
+
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0, 0, getSheepPolly(pollyScreen));
+    return gamePainter->process();
 }
 
 QPixmap *Game::getCoupleSheep(GameTask *task)
 {
-    QPixmap *pixmap=new QPixmap(task->screenSize);
-    pixmap->fill(Qt::transparent);
-    QPainter *painter=new QPainter(pixmap);
-
+    //prepare extra screenSize calculation
     QSize polly_lolly_screen=QSize((task->screenSize.width()/4),task->screenSize.height()/4);
-    painter->drawPixmap(0, 0, getSheepPolly(polly_lolly_screen));
-    painter->drawPixmap((task->screenSize.width()/4),0,getSheepLolly(polly_lolly_screen));
-    painter->end();
-    return pixmap;
+
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0, 0, getSheepPolly(polly_lolly_screen));
+    gamePainter->draw((task->screenSize.width()/4),0,getSheepLolly(polly_lolly_screen));
+    return gamePainter->process();
 }
 
 State* Game::drawProlog(GameTask *task)
@@ -99,6 +102,12 @@ State* Game::drawProlog(GameTask *task)
     return sceneToPaint;
 }
 
+bool Game::isLastSceneInLevel()
+{
+    if (lastPainted->sceneImg==Prolog_scene::Prolog_LastFrase){return true;}
+    return false;
+}
+
 State* Game::drawByTask(GameTask *task)
 {
     State *sceneToPaint;
@@ -115,12 +124,16 @@ State* Game::drawMeScene(GameTask *task)
 
 void Game::debugScene(GameTask *task)
 {
+    //debug info
     taskInfo(task);
 
+    //label for output
     QLabel *label=new QLabel();
 
+    //extract drawed images
     QPixmap *pixmap = &drawByTask(task)->img;
 
+    //set images to label and show
     label->setPixmap(*pixmap);
     label->resize(task->screenSize);
     label->show();

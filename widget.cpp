@@ -22,7 +22,7 @@ Widget::~Widget()
 void Widget::drawScene0(QPaintEvent *pe)
 {
     GameTask *gameTask =new GameTask(Level::prolog,Prolog_scene::Prolog_StartMenuScreen);
-        gameTask->screenSize=QSize(width(),height());
+    gameTask->screenSize=QSize(width(),height());
 
     QPainter paint(this);
     QPixmap pixmap = game->drawMeScene(gameTask)->img;
@@ -48,22 +48,27 @@ void Widget::resizeEvent(QResizeEvent *event)
 void Widget::mousePressEvent(QMouseEvent *event)
 {
     qDebug()<<"Mouse pressed";
-    game->lastPainted->sceneImg++;
-    GameTask *gameTask =new GameTask(game->lastPainted->level,game->lastPainted->sceneImg);
+
+    if (game->isLastSceneInLevel()){
+        ui->stackedWidget->setCurrentIndex(0);
+    }
+    else{
+        game->lastPainted->sceneImg++;
+        GameTask *gameTask =new GameTask(game->lastPainted->level,game->lastPainted->sceneImg);
         gameTask->screenSize=QSize(width(),height());
 
         setSceneByNewTask(gameTask);
-
-//        game->debugScene(gameTask);
-        game->changed=true;
-        QWidget::update();
+    }
+    game->changed=true;
+    QWidget::update();
 }
 
 void Widget::on_label_clicked()
 {
-        ui->stackedWidget->setCurrentIndex(1);
-        game->changed=true;
-        QWidget::update();
+    ui->stackedWidget->setCurrentIndex(1);
+
+    game->changed=true;
+    QWidget::update();
 }
 
 void Widget::setSceneByNewTask(GameTask *gameTask)

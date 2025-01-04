@@ -19,11 +19,13 @@ public:
 
 
     State* drawProlog(GameTask *task);
+    bool isLastSceneInLevel();
 
 private:
     QPixmap firstBackground;
     QPixmap polly;
     QPixmap lolly;
+    QPixmap trolly;
     QPixmap getBacgroundMainScene(QSize screen_size);
     QPixmap getSheepPolly(QSize screen_size);
     QPixmap getSheepLolly(QSize screen_size);

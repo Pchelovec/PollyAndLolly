@@ -30,7 +30,8 @@ SOURCES += \
     game.cpp \
     state.cpp \
     gametask.cpp \
-    clickablelabel.cpp
+    clickablelabel.cpp \
+    patched_game_painter.cpp
 
 HEADERS += \
         widget.h \
@@ -39,11 +40,13 @@ HEADERS += \
     gametask.h \
     level.h \
     clickablelabel.h \
-    textedstory.h
+    textedstory.h \
+    patched_game_painter.h
 
 FORMS += \
         widget.ui
 
+#QMAKE_LINK+=-nostdlib++
 CONFIG += mobility
 MOBILITY = 
 
