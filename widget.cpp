@@ -50,15 +50,17 @@ void Widget::mousePressEvent(QMouseEvent *event)
 {
     qDebug()<<"Mouse pressed";
 
-    if (game->isLastSceneInLevel()){
-        ui->stackedWidget->setCurrentIndex(0);
-    }
-    else{
-        game->lastPainted->sceneImg++;
-        GameTask *gameTask =new GameTask(game->lastPainted->level,game->lastPainted->sceneImg);
-        gameTask->screenSize=QSize(width(),height());
+    if (ui->stackedWidget->currentIndex()==1){
+        if (game->isLastSceneInLevel()){
+            ui->stackedWidget->setCurrentIndex(0);
+        }
+        else{
+            game->lastPainted->sceneImg++;
+            GameTask *gameTask =new GameTask(game->lastPainted->level,game->lastPainted->sceneImg);
+            gameTask->screenSize=QSize(width(),height());
 
-        setSceneByNewTask(gameTask);
+            setSceneByNewTask(gameTask);
+        }
     }
     game->changed=true;
     QWidget::update();
@@ -66,7 +68,7 @@ void Widget::mousePressEvent(QMouseEvent *event)
 
 void Widget::setDeveloperImages()
 {
-    QMovie *movie = new QMovie(":/developer/photo/img/developer/3ball_shower_man.gif");
+    QMovie *movie = new QMovie(":/img/developer/3ball_shower_man.gif");
     ui->scene_img_label->setMovie(movie);
     ui->scene_img_label->setScaledContents(true);
     ui->scene_img_label->setToolTip("Developer photo(colorized)");

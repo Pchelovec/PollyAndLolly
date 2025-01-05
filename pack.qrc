@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/developer/3ball_shower_man.gif</file>
+        <file>img/level0/cloud.png</file>
+        <file>img/level0/garden-refuge-captivating-bee-house-scenes-ai-generative-free-png.webp</file>
+        <file>img/level0/heart-background-photography.png</file>
+        <file>img/level0/honey-and-honeycombs-illustration.png</file>
+        <file>img/level0/rain.png</file>
+        <file>img/level0/sun.png</file>
+        <file>img/level0/tablo2_with_sale_text.png</file>
+        <file>img/level0/tent.png</file>
+        <file>img/level0/umbrella.png</file>
+        <file>img/sheeps/Lolly.png</file>
+        <file>img/sheeps/Polly.png</file>
+        <file>img/sheeps/Trolly.png</file>
+        <file>img/background.png</file>
+        <file>img/background0.png</file>
+        <file>img/cloud.png</file>
+        <file>img/grassBackground.png</file>
+    </qresource>
+</RCC>

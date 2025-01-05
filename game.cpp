@@ -11,12 +11,12 @@ Game::Game(QObject *parent) : QObject(parent)
     lastPainted=new State();
 
     //load main backgrounds
-    firstBackground.load(":/common/img/background0.png");
+    firstBackground.load(":/img/background0.png");
 
     //load main persons
-    polly.load(":/sheep/img/sheeps/Polly.png");
-    lolly.load(":/sheep/img/sheeps/Lolly.png");
-    trolly.load(":/sheep/img/Sheeps/Trolly.png");
+    polly.load(":/img/sheeps/Polly.png");
+    lolly.load(":/img/sheeps/Lolly.png");
+    trolly.load(":/img/sheeps/Trolly.png");
 }
 
 QPixmap Game::getBacgroundMainScene(QSize screen_size)
@@ -81,7 +81,7 @@ QPixmap *Game::getCoupleSheep(GameTask *task)
     //draw
     PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
     gamePainter->create();
-    gamePainter->draw(0,0,getResImg(":/levels/level0/img/level0/clipart-heart-background-photography.png",task->screenSize));
+    gamePainter->draw(0,0,getResImg(":/img/level0/heart-background-photography.png",task->screenSize));
     gamePainter->draw(0, 0, getSheepPolly(polly_lolly_screen));
     gamePainter->draw((task->screenSize.width()/2),0,getSheepLolly(polly_lolly_screen));
     return gamePainter->process();
@@ -97,10 +97,10 @@ QPixmap *Game::getPollySunOrRainImg(GameTask *task)
     //draw
     PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
     gamePainter->create();
-    gamePainter->draw(0, 0, getResImg(":/levels/level0/img/level0/rain.png",task->screenSize));//
-    gamePainter->draw(0, 0,getResImg(":/levels/level0/img/level0/cloud.png",cloudSize));//
-    gamePainter->draw(task->screenSize.width()/4*2, 0,getResImg(":/levels/level0/img/level0/cloud.png",cloudSize));//
-    gamePainter->draw(0, 0,getResImg(":/levels/level0/img/level0/tent.png",tentSize));
+    gamePainter->draw(0, 0, getResImg(":/img/level0/rain.png",task->screenSize));//
+    gamePainter->draw(0, 0,getResImg(":/img/level0/cloud.png",cloudSize));//
+    gamePainter->draw(task->screenSize.width()/4*2, 0,getResImg(":/img/level0/cloud.png",cloudSize));//
+    gamePainter->draw(0, 0,getResImg(":/img/level0/tent.png",tentSize));
     gamePainter->draw(0, (task->screenSize.height()/3)*2, getSheepPolly(pollySize));
     return gamePainter->process();
 }
@@ -115,9 +115,9 @@ QPixmap *Game::getPollySunImg(GameTask *task)
     //draw
     PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
     gamePainter->create();
-    gamePainter->draw(task->screenSize.width()/2,0,getResImg(":/levels/level0/img/level0/sun.png",cloudSize));
-    gamePainter->draw(task->screenSize.width()/2, 0,getResImg(":/levels/level0/img/level0/cloud.png",cloudSize));//
-    gamePainter->draw(task->screenSize.width()/4, task->screenSize.height()-umbrellaSize.height()-20,getResImg(":/levels/level0/img/level0/umbrella.png",umbrellaSize));
+    gamePainter->draw(task->screenSize.width()/2,0,getResImg(":/img/level0/sun.png",cloudSize));
+    gamePainter->draw(task->screenSize.width()/2, 0,getResImg(":/img/level0/cloud.png",cloudSize));//
+    gamePainter->draw(task->screenSize.width()/4, task->screenSize.height()-umbrellaSize.height()-20,getResImg(":/img/level0/umbrella.png",umbrellaSize));
     gamePainter->draw(0, (task->screenSize.height()/3)*2, getSheepPolly(pollySize));
     return gamePainter->process();
 }
@@ -129,7 +129,7 @@ QPixmap *Game::drawPollyBeeHouse(GameTask *task)
 
     PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
     gamePainter->create();
-    gamePainter->draw(0,0,getResImg(":/levels/level0/img/level0/garden-refuge-captivating-bee-house-scenes-ai-generative-free-png.webp",beeHomeSize));
+    gamePainter->draw(0,0,getResImg(":/img/level0/garden-refuge-captivating-bee-house-scenes-ai-generative-free-png.webp",beeHomeSize));
     gamePainter->draw(task->screenSize.width()/2,task->screenSize.height()/2,getSheepPolly(pollySize));
     return gamePainter->process();
 }
@@ -141,9 +141,9 @@ QPixmap *Game::drawPollyHoneyDiller(GameTask *task)
 
     PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
     gamePainter->create();
-    gamePainter->draw(0,0,getResImg(":/levels/level0/img/level0/honey-and-honeycombs-illustration.png",task->screenSize));
+    gamePainter->draw(0,0,getResImg(":/img/level0/honey-and-honeycombs-illustration.png",task->screenSize));
     gamePainter->draw(task->screenSize.width()/2,task->screenSize.height()/2,getSheepPolly(pollySize));
-    gamePainter->draw((task->screenSize.width()/4)*3,(task->screenSize.height()-tabloSize.height()),getResImg(":/levels/level0/img/level0/tablo2_with_sale_text.png",tabloSize));
+    gamePainter->draw((task->screenSize.width()/4)*3,(task->screenSize.height()-tabloSize.height()),getResImg(":/img/level0/tablo2_with_sale_text.png",tabloSize));
     return gamePainter->process();
 }
 
