@@ -68,6 +68,7 @@ void Widget::setDeveloperImages()
 {
     QMovie *movie = new QMovie(":/developer/photo/img/developer/3ball_shower_man.gif");
     ui->scene_img_label->setMovie(movie);
+    ui->scene_img_label->setScaledContents(true);
     ui->scene_img_label->setToolTip("Developer photo(colorized)");
     movie->start();
 }
