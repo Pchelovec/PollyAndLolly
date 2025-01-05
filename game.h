@@ -30,13 +30,17 @@ private:
     QPixmap getSheepPolly(QSize screen_size);
     QPixmap getSheepLolly(QSize screen_size);
 
+    QPixmap getResImg(QString path,QSize screen_size);
+
 
     void taskInfo(GameTask * task);
-//    QPixmap drawScene0Prolog(GameTask *task);
-//    QPixmap drawTempalteSceneByTask(GameTask *task);
     QPixmap* drawScene0_Prolog(GameTask *task);
-    QPixmap* getSingleLolly(GameTask *task);
+    QPixmap* getSinglePolly(GameTask *task);
     QPixmap* getCoupleSheep(GameTask *task);
+    QPixmap* getPollySunOrRainImg(GameTask *task);
+    QPixmap* getPollySunImg(GameTask *task);
+    QPixmap* drawPollyBeeHouse(GameTask *task);
+    QPixmap* drawPollyHoneyDiller(GameTask *task);
 
 
     State* drawByTask(GameTask *task);

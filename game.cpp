@@ -34,6 +34,13 @@ QPixmap Game::getSheepLolly(QSize screen_size)
     return lolly.scaled(screen_size.width(),screen_size.height());
 }
 
+QPixmap Game::getResImg(QString path, QSize screen_size)
+{
+    QPixmap pixmap;
+    pixmap.load(path);
+    return pixmap.scaled(screen_size.width(),screen_size.height());
+}
+
 void Game::taskInfo(GameTask *task)
 {
     qDebug()<<"--------------New task !----------------------";
@@ -55,10 +62,11 @@ QPixmap* Game::drawScene0_Prolog(GameTask *task)
     return gamePainter->process();
 }
 
-QPixmap* Game::getSingleLolly(GameTask* task){
+QPixmap* Game::getSinglePolly(GameTask* task){
     //prepare extra screenSize calculation
-    QSize pollyScreen=QSize((task->screenSize.width()/4),task->screenSize.height()/4);
+    QSize pollyScreen=QSize((task->screenSize.width()),task->screenSize.height());
 
+    //draw
     PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
     gamePainter->create();
     gamePainter->draw(0, 0, getSheepPolly(pollyScreen));
@@ -68,12 +76,75 @@ QPixmap* Game::getSingleLolly(GameTask* task){
 QPixmap *Game::getCoupleSheep(GameTask *task)
 {
     //prepare extra screenSize calculation
-    QSize polly_lolly_screen=QSize((task->screenSize.width()/4),task->screenSize.height()/4);
+    QSize polly_lolly_screen=QSize((task->screenSize.width()/2),task->screenSize.height());
+
+    //draw
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getResImg(":/levels/level0/img/level0/clipart-heart-background-photography.png",task->screenSize));
+    gamePainter->draw(0, 0, getSheepPolly(polly_lolly_screen));
+    gamePainter->draw((task->screenSize.width()/2),0,getSheepLolly(polly_lolly_screen));
+    return gamePainter->process();
+}
+
+QPixmap *Game::getPollySunOrRainImg(GameTask *task)
+{
+    //prepare extra screenSize calculation
+    QSize pollySize=QSize((task->screenSize.width())/3,task->screenSize.height()/3);
+    QSize cloudSize=QSize((task->screenSize.width())/4,task->screenSize.height()/4);
+    QSize tentSize=QSize(task->screenSize.width()/2,task->screenSize.height());
+
+    //draw
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0, 0, getResImg(":/levels/level0/img/level0/rain.png",task->screenSize));//
+    gamePainter->draw(0, 0,getResImg(":/levels/level0/img/level0/cloud.png",cloudSize));//
+    gamePainter->draw(task->screenSize.width()/4*2, 0,getResImg(":/levels/level0/img/level0/cloud.png",cloudSize));//
+    gamePainter->draw(0, 0,getResImg(":/levels/level0/img/level0/tent.png",tentSize));
+    gamePainter->draw(0, (task->screenSize.height()/3)*2, getSheepPolly(pollySize));
+    return gamePainter->process();
+}
+
+QPixmap *Game::getPollySunImg(GameTask *task)
+{
+    //prepare extra screenSize calculation
+    QSize pollySize=QSize((task->screenSize.width())/3,task->screenSize.height()/3);
+    QSize cloudSize=QSize((task->screenSize.width())/4,task->screenSize.height()/4);
+    QSize umbrellaSize=QSize(task->screenSize.width()/4,task->screenSize.height()/4);
+
+    //draw
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(task->screenSize.width()/2,0,getResImg(":/levels/level0/img/level0/sun.png",cloudSize));
+    gamePainter->draw(task->screenSize.width()/2, 0,getResImg(":/levels/level0/img/level0/cloud.png",cloudSize));//
+    gamePainter->draw(40, task->screenSize.height()/2,getResImg(":/levels/level0/img/level0/umbrella.png",umbrellaSize));
+    gamePainter->draw(0, (task->screenSize.height()/3)*2, getSheepPolly(pollySize));
+    return gamePainter->process();
+}
+
+QPixmap *Game::drawPollyBeeHouse(GameTask *task)
+{
+    QSize beeHomeSize=QSize((task->screenSize.width())/2,task->screenSize.height());
+    QSize pollySize=QSize((task->screenSize.width())/3,task->screenSize.height());
 
     PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
     gamePainter->create();
-    gamePainter->draw(0, 0, getSheepPolly(polly_lolly_screen));
-    gamePainter->draw((task->screenSize.width()/4),0,getSheepLolly(polly_lolly_screen));
+    gamePainter->draw(0,0,getResImg(":/levels/level0/img/level0/garden-refuge-captivating-bee-house-scenes-ai-generative-free-png.webp",beeHomeSize));
+    gamePainter->draw(task->screenSize.width()/2+40,0,getSheepPolly(pollySize));
+    return gamePainter->process();
+}
+
+QPixmap *Game::drawPollyHoneyDiller(GameTask *task)
+{
+    QSize pollySize=QSize((task->screenSize.width())/3,task->screenSize.height());
+    QSize honeyBeeSize=QSize(((task->screenSize.width())/3)*2,task->screenSize.height());
+    QSize tabloSize=QSize((task->screenSize.width())/6,task->screenSize.height()/2);
+
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getResImg(":/levels/level0/img/level0/honey-and-honeycombs-illustration.png",honeyBeeSize));
+    gamePainter->draw(task->screenSize.width()/2+40,0,getSheepPolly(pollySize));
+    gamePainter->draw(task->screenSize.width()/2+40,task->screenSize.height()/2,getResImg(":/levels/level0/img/level0/tablo2_with_sale_text.png",tabloSize));
     return gamePainter->process();
 }
 
@@ -82,20 +153,20 @@ State* Game::drawProlog(GameTask *task)
     State* sceneToPaint=new State();
     sceneToPaint->level=task->level;
     sceneToPaint->sceneImg=task->scene;
-//    QPixmap *result;
+    //    QPixmap *result;
     switch (task->scene) {
-        case Prolog_StartMenuScreen:{sceneToPaint->img=*drawScene0_Prolog(task);break;}
-        case Prolog_SinglePollyScene:{sceneToPaint->img=*getSingleLolly(task);sceneToPaint->gameText=textedStory::getPrologText(0);break;}
-        case Prolog_TiredPolly:{sceneToPaint->img=*getSingleLolly(task);sceneToPaint->gameText=textedStory::getPrologText(1);break;}
-        case Prolog_PollyLookingForAFriend:{sceneToPaint->img=*getSingleLolly(task);sceneToPaint->gameText=textedStory::getPrologText(2);break;}
-        case Prolog_PollyDisaster:{sceneToPaint->img=*getSingleLolly(task);sceneToPaint->gameText=textedStory::getPrologText(3);break;}
-        case Prolog_PollyUnderRain:{sceneToPaint->img=*getSingleLolly(task);sceneToPaint->gameText=textedStory::getPrologText(5);break;}
-        case Prolog_PollyUnderSun:{sceneToPaint->img=*getSingleLolly(task);sceneToPaint->gameText=textedStory::getPrologText(6);break;}
-        case Prolog_PollyPasekaMod:{sceneToPaint->img=*getSingleLolly(task);sceneToPaint->gameText=textedStory::getPrologText(7);break;}
-        case Prolog_PollyRealizatorMod:{sceneToPaint->img=*getSingleLolly(task);sceneToPaint->gameText=textedStory::getPrologText(8);break;}
-        case Prolog_PollyFindLolly:{sceneToPaint->img=*getSingleLolly(task);sceneToPaint->gameText=textedStory::getPrologText(10);break;}
-        case Prolog_LollyMeetPolly:{sceneToPaint->img=*getCoupleSheep(task);sceneToPaint->gameText=textedStory::getPrologText(11);break;}
-        case Prolog_LastFrase:{sceneToPaint->img=*getCoupleSheep(task);sceneToPaint->gameText=textedStory::getPrologText(12);break;}
+    case Prolog_StartMenuScreen:{sceneToPaint->img=*drawScene0_Prolog(task);break;}//
+    case Prolog_SinglePollyScene:{sceneToPaint->img=*getSinglePolly(task);sceneToPaint->gameText=textedStory::getPrologText(0);break;}
+    case Prolog_TiredPolly:{sceneToPaint->img=*getSinglePolly(task);sceneToPaint->gameText=textedStory::getPrologText(1);break;}
+    case Prolog_PollyLookingForAFriend:{sceneToPaint->img=*getSinglePolly(task);sceneToPaint->gameText=textedStory::getPrologText(2);break;}
+    case Prolog_PollyDisaster:{sceneToPaint->img=*getSinglePolly(task);sceneToPaint->gameText=textedStory::getPrologText(3);break;}
+    case Prolog_PollyUnderRain:{sceneToPaint->img=*getPollySunOrRainImg(task);sceneToPaint->gameText=textedStory::getPrologText(5);break;}
+    case Prolog_PollyUnderSun:{sceneToPaint->img=*getPollySunImg(task);sceneToPaint->gameText=textedStory::getPrologText(6);break;}
+    case Prolog_PollyPasekaMod:{sceneToPaint->img=*drawPollyBeeHouse(task);sceneToPaint->gameText=textedStory::getPrologText(7);break;}
+    case Prolog_PollyRealizatorMod:{sceneToPaint->img=*drawPollyHoneyDiller(task);sceneToPaint->gameText=textedStory::getPrologText(8);break;}
+    case Prolog_PollyFindLolly:{sceneToPaint->img=*getSinglePolly(task);sceneToPaint->gameText=textedStory::getPrologText(10);break;}
+    case Prolog_LollyMeetPolly:{sceneToPaint->img=*getCoupleSheep(task);sceneToPaint->gameText=textedStory::getPrologText(11);break;}
+    case Prolog_LastFrase:{sceneToPaint->img=*getCoupleSheep(task);sceneToPaint->gameText=textedStory::getPrologText(12);break;}
 
     }
 

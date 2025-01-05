@@ -17,6 +17,8 @@ public:
 
     void drawScene0(QPaintEvent *event);
 
+    void setDeveloperImages();
+    
 private slots:
     void on_label_clicked();
 

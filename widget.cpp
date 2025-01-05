@@ -3,6 +3,7 @@
 #include "gametask.h"
 #include <QDebug>
 #include <QPainter>
+#include<QMovie>
 #include"level.h"
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -63,9 +64,19 @@ void Widget::mousePressEvent(QMouseEvent *event)
     QWidget::update();
 }
 
+void Widget::setDeveloperImages()
+{
+    QMovie *movie = new QMovie(":/developer/photo/img/developer/3ball_shower_man.gif");
+    ui->scene_img_label->setMovie(movie);
+    ui->scene_img_label->setToolTip("Developer photo(colorized)");
+    movie->start();
+}
+
 void Widget::on_label_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
+
+    setDeveloperImages();
 
     game->changed=true;
     QWidget::update();

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>366</width>
-    <height>363</height>
+    <width>548</width>
+    <height>358</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -239,7 +239,7 @@ QLabel:pressed {
              </font>
             </property>
             <property name="text">
-             <string>Добро пожаловать в Polly and Lolly lyric Story!</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Добро пожаловать в Polly and Lolly lyric Story!&lt;/p&gt;&lt;p&gt;(click для продолжения)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
