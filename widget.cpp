@@ -5,6 +5,7 @@
 #include <QPainter>
 #include<QMovie>
 #include"level.h"
+#include<QScreen>
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
@@ -12,6 +13,7 @@ Widget::Widget(QWidget *parent) :
     ui->setupUi(this);
     game=new Game();
     ui->stackedWidget->setCurrentIndex(0);
+    loadAds();
     qDebug()<<"Welcome to Polly And Lolly Lyric Story!";
 }
 
@@ -20,6 +22,22 @@ Widget::~Widget()
     delete ui;
 }
 
+void Widget::loadAds()
+{
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect  screenGeometry = screen->geometry();
+    int height = screenGeometry.height();
+    int width = screenGeometry.width();
+
+    banner=new QmlBanner();
+    banner->setUnitId("ca-app-pub-3940256099942544/6300978111");
+    banner->setBannerSize(QmlBanner::LARGE_BANNER);
+    banner->setX(40);
+    banner->setY((height/4)*3);
+    banner->setTestDeviceId("41E647017EBEBB0650DAE627391B7A43");
+    banner->loadBanner();
+    banner->setVisible(true);
+}
 void Widget::drawScene0(QPaintEvent *pe)
 {
     GameTask *gameTask =new GameTask(Level::prolog,Prolog_scene::Prolog_StartMenuScreen);
@@ -53,6 +71,7 @@ void Widget::mousePressEvent(QMouseEvent *event)
     if (ui->stackedWidget->currentIndex()==1){
         if (game->isLastSceneInLevel()){
             ui->stackedWidget->setCurrentIndex(0);
+            banner->setVisible(true);
         }
         else{
             game->lastPainted->sceneImg++;
@@ -78,6 +97,7 @@ void Widget::setDeveloperImages()
 void Widget::on_label_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
+    banner->setVisible(false);
 
     setDeveloperImages();
 

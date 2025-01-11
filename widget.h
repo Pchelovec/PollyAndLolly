@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include "game.h"
+#include "Admob/QmlBanner.h"
+
 namespace Ui {
 class Widget;
 }
@@ -19,12 +21,15 @@ public:
 
     void setDeveloperImages();
     
+    void loadAds();
+    
 private slots:
     void on_label_clicked();
 
 private:
     Ui::Widget *ui;
     Game *game;
+    QmlBanner *banner;
 
     void setSceneByNewTask(GameTask * gameTask);
 

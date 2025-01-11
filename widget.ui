@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page">
       <layout class="QGridLayout" name="gridLayout_2">
@@ -176,7 +176,7 @@ QLabel:pressed {
            <property name="sizeHint" stdset="0">
             <size>
              <width>20</width>
-             <height>60</height>
+             <height>160</height>
             </size>
            </property>
           </spacer>
