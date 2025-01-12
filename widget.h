@@ -24,6 +24,8 @@ public:
     void loadAds();
     
     
+    GameTask * gameTaskForNextScene();
+
 private slots:
     void on_label_prolog_clicked();
 

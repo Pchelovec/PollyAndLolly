@@ -11,14 +11,11 @@ class Game : public QObject
     Q_OBJECT
 public:
     explicit Game(QObject *parent = nullptr);
-    State *lastPainted;
-    State* drawMeScene(GameTask *task);
+    Scene *lastPainted;
+    Scene* drawMeScene(GameTask *task);
     void debugScene(GameTask *task);
     bool changed;
 
-
-
-    State* drawProlog(GameTask *task);
     bool isLastSceneInLevel();
     void saveProgress();
     void loadProgress();
@@ -45,7 +42,9 @@ private:
     QPixmap* drawPollyHoneyDiller(GameTask *task);
 
 
-    State* drawByTask(GameTask *task);
+    Scene* drawByTask(GameTask *task);
+    Scene* drawProlog(GameTask *task);
+
 };
 
 #endif // GAME_H

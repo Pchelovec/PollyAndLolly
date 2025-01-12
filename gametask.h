@@ -4,14 +4,15 @@
 #include <QObject>
 #include <QSize>
 #include "level.h"
+#include"state.h"
 class GameTask : public QObject
 {
     Q_OBJECT
 public:
     explicit GameTask(QObject *parent = nullptr);
-    GameTask(Level l,Prolog_scene s);
+    GameTask(Level l,Screen s);
     Level level;
-    Prolog_scene scene;
+    Screen screen;
     QSize screenSize;
 
 private:

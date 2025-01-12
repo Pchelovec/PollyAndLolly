@@ -16,7 +16,7 @@ public:
     Progress(){}
     static QString filename;
 
-    static bool saveProgress(State *state){
+    static bool saveProgress(Scene *state){
 
         QFile file( filename );
         if ( file.open(QIODevice::ReadWrite) )
@@ -26,7 +26,7 @@ public:
         }
     }
 
-    static bool loadProgress(State *state){
+    static bool loadProgress(Scene *state){
 
         QFile file( filename );
         if ( file.open(QIODevice::ReadWrite) )

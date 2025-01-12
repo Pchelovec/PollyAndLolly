@@ -53,4 +53,9 @@ inline TeaWalk_scene& operator++(TeaWalk_scene& mode, const int){
         mode = static_cast<TeaWalk_scene>((mode + 1));
         return mode;
 }
+
+enum zoo_scene{
+    demo
+};
+
 #endif // LEVEL_H

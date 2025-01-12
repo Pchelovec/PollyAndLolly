@@ -13,6 +13,11 @@ public:
     static QString getPrologText(int row){
         return prologText.at(row);
     }
+
+    static QStringList teaWalkText;
+    static QString getTeaWalkText(int row){
+        return prologText.at(row);
+    }
 };
 
 QStringList textedStory::prologText=QStringList({"Однажды Polly по травке на поле гуляла",
@@ -28,5 +33,26 @@ QStringList textedStory::prologText=QStringList({"Однажды Polly по тр
                                         "Долго наша Polly ходила-бродила",
                                         "Пока однажды на улице нового друга нашла.",
                                         "Знакомтесь! Это Lolly - друг очень хороший,\n который есть у нашей Polly!"});
+
+QStringList textedStory::teaWalkText=QStringList({"Polly и Lolly на поле гуляли",
+                                                 "Polly и Lolly развлечений искали",
+                                                 "На поле этом Polly и Molly монетку нашли",
+                                                 "Polly и Lolly в кафе чай пить пошли",
+                                                 "",
+                                                 "Когда Polly и Lolly к кафе пришли",
+                                                 "Они еще манетку нашли",
+                                                 "",
+                                                 "У жирафа они чай заказали",
+                                                 "Одну манетку жирафу отдали",
+                                                 "",
+                                                 "Чай принесли",
+                                                 "К окну Polly и Lolly чай пить пошли",
+                                                 "Чай допивали",
+                                                 "Второй чай заказали",
+                                                 "",
+                                                 "Когда весь чай в кафе повыпивали",
+                                                 "Polly и Lolly домой поскакали",
+                                                 "",
+                                                 "Ведь их дома уже ждали!"});
 }
 #endif // TEXTEDSTORY_H

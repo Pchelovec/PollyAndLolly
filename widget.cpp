@@ -65,6 +65,15 @@ void Widget::resizeEvent(QResizeEvent *event)
     QWidget::update();
 }
 
+GameTask * Widget::gameTaskForNextScene()
+{
+    game->lastPainted->incrementScene();
+    GameTask *gameTask =new GameTask(game->lastPainted->level,game->lastPainted->screen);
+    gameTask->screenSize=QSize(width(),height());
+
+    return gameTask;
+}
+
 void Widget::mousePressEvent(QMouseEvent *event)
 {
     qDebug()<<"Mouse pressed";
@@ -76,10 +85,8 @@ void Widget::mousePressEvent(QMouseEvent *event)
             game->saveProgress();
         }
         else{
-            game->lastPainted->sceneImg++;
-            GameTask *gameTask =new GameTask(game->lastPainted->level,game->lastPainted->sceneImg);
-            gameTask->screenSize=QSize(width(),height());
-
+            //todo update incrementation by new mitod like 'next'
+            GameTask *gameTask = gameTaskForNextScene();
             setSceneByNewTask(gameTask);
         }
     }
@@ -103,7 +110,7 @@ void Widget::setSceneByNewTask(GameTask *gameTask)
         task=new GameTask(Level::PROLOG,Prolog_scene::Prolog_StartMenuScreen);
     }
     gameTask->screenSize=QSize(ui->scene_img_label->width(),ui->scene_img_label->height());
-    State *s=game->drawMeScene(task);
+    Scene *s=game->drawMeScene(task);
     game->lastPainted=s;
     ui->scene_img_label->setPixmap(s->img);
     ui->scene_text_label->setText(s->gameText);

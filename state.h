@@ -5,20 +5,33 @@
 #include<QPixmap>
 #include<QString>
 #include "level.h"
-class State : public QObject
-{
+class Screen{
+private:
+    int screen;
+
+public:
+    Screen(){}
+    Screen(int s){screen=s;}
+    Screen(Prolog_scene prolog){this->screen=(int)prolog;}
+    Screen(TeaWalk_scene teawalk){this->screen=(int)teawalk;}
+    Screen(zoo_scene zoo){this->screen=(int)zoo;}
+    int getScreen(){return screen;}
+
+};
+inline Screen& operator++(Screen& mode, const int){
+    mode = static_cast<Screen>((mode.getScreen() + 1));
+    return mode;
+}
+class Scene: public QObject{
     Q_OBJECT
 public:
-    explicit State(QObject *parent = nullptr);
-    State(Level l,Prolog_scene s);
+        explicit Scene(QObject *parent = nullptr);
+        Scene(Level l,Screen s);
     Level level;
-    Prolog_scene sceneImg;
+    Screen screen;
     QString gameText;
     QPixmap img;
 
-private:
-
+    void incrementScene();
 };
-//QDataStream &operator<<(QDataStream &out, const State &progress);
-//QDataStream &operator>>(QDataStream &in, State &progress);
 #endif // STATE_H

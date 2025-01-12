@@ -8,7 +8,7 @@
 #include <QDebug>
 Game::Game(QObject *parent) : QObject(parent)
 {
-    lastPainted=new State();
+    lastPainted=new Scene();
 
     //load main backgrounds
     firstBackground.load(":/img/background0.png");
@@ -45,7 +45,7 @@ void Game::taskInfo(GameTask *task)
 {
     qDebug()<<"--------------New task !----------------------";
     qDebug()<<"Level:"<<task->level;
-    qDebug()<<"Scene:"<<task->scene;
+    qDebug()<<"Scene:"<<task->screen.getScreen();
     qDebug()<<"Screen_size"<<task->screenSize;
 }
 
@@ -147,13 +147,13 @@ QPixmap *Game::drawPollyHoneyDiller(GameTask *task)
     return gamePainter->process();
 }
 
-State* Game::drawProlog(GameTask *task)
+Scene* Game::drawProlog(GameTask *task)
 {
-    State* sceneToPaint=new State();
+    Scene* sceneToPaint=new Scene();
     sceneToPaint->level=task->level;
-    sceneToPaint->sceneImg=task->scene;
+    sceneToPaint->screen=task->screen;
     //    QPixmap *result;
-    switch (task->scene) {
+    switch (task->screen.getScreen()) {
     case Prolog_StartMenuScreen:{sceneToPaint->img=*drawScene0_Prolog(task);break;}//
     case Prolog_SinglePollyScene:{sceneToPaint->img=*getSinglePolly(task);sceneToPaint->gameText=textedStory::getPrologText(0);break;}
     case Prolog_TiredPolly:{sceneToPaint->img=*getSinglePolly(task);sceneToPaint->gameText=textedStory::getPrologText(1);break;}
@@ -174,7 +174,8 @@ State* Game::drawProlog(GameTask *task)
 
 bool Game::isLastSceneInLevel()
 {
-    if (lastPainted->sceneImg==Prolog_scene::Prolog_FinalPrologFrase){return true;}
+    //todo check for level
+    if (lastPainted->screen.getScreen()==Prolog_scene::Prolog_FinalPrologFrase){return true;}
     return false;
 }
 
@@ -188,15 +189,15 @@ void Game::loadProgress()
     Progress::loadProgress(lastPainted);
 }
 
-State* Game::drawByTask(GameTask *task)
+Scene* Game::drawByTask(GameTask *task)
 {
-    State *sceneToPaint;
+    Scene *sceneToPaint;
     if (task->level==Level::PROLOG)
         sceneToPaint=drawProlog(task);
     return sceneToPaint;
 }
 
-State* Game::drawMeScene(GameTask *task)
+Scene* Game::drawMeScene(GameTask *task)
 {
     taskInfo(task);
     return drawByTask(task);
