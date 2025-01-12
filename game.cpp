@@ -165,7 +165,7 @@ State* Game::drawProlog(GameTask *task)
     case Prolog_PollyRealizatorMod:{sceneToPaint->img=*drawPollyHoneyDiller(task);sceneToPaint->gameText=textedStory::getPrologText(8);break;}
     case Prolog_PollyFindLolly:{sceneToPaint->img=*getSinglePolly(task);sceneToPaint->gameText=textedStory::getPrologText(10);break;}
     case Prolog_LollyMeetPolly:{sceneToPaint->img=*getCoupleSheep(task);sceneToPaint->gameText=textedStory::getPrologText(11);break;}
-    case Prolog_LastFrase:{sceneToPaint->img=*getCoupleSheep(task);sceneToPaint->gameText=textedStory::getPrologText(12);break;}
+    case Prolog_FinalPrologFrase:{sceneToPaint->img=*getCoupleSheep(task);sceneToPaint->gameText=textedStory::getPrologText(12);break;}
 
     }
 
@@ -174,14 +174,24 @@ State* Game::drawProlog(GameTask *task)
 
 bool Game::isLastSceneInLevel()
 {
-    if (lastPainted->sceneImg==Prolog_scene::Prolog_LastFrase){return true;}
+    if (lastPainted->sceneImg==Prolog_scene::Prolog_FinalPrologFrase){return true;}
     return false;
+}
+
+void Game::saveProgress()
+{
+    Progress::saveProgress(lastPainted);
+}
+
+void Game::loadProgress()
+{
+    Progress::loadProgress(lastPainted);
 }
 
 State* Game::drawByTask(GameTask *task)
 {
     State *sceneToPaint;
-    if (task->level==Level::prolog)
+    if (task->level==Level::PROLOG)
         sceneToPaint=drawProlog(task);
     return sceneToPaint;
 }

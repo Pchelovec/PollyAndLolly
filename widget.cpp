@@ -13,6 +13,7 @@ Widget::Widget(QWidget *parent) :
     ui->setupUi(this);
     game=new Game();
     ui->stackedWidget->setCurrentIndex(0);
+    updateGameProgressUI();
     loadAds();
     qDebug()<<"Welcome to Polly And Lolly Lyric Story!";
 }
@@ -40,7 +41,7 @@ void Widget::loadAds()
 }
 void Widget::drawScene0(QPaintEvent *pe)
 {
-    GameTask *gameTask =new GameTask(Level::prolog,Prolog_scene::Prolog_StartMenuScreen);
+    GameTask *gameTask =new GameTask(Level::PROLOG,Prolog_scene::Prolog_StartMenuScreen);
     gameTask->screenSize=QSize(width(),height());
 
     QPainter paint(this);
@@ -72,6 +73,7 @@ void Widget::mousePressEvent(QMouseEvent *event)
         if (game->isLastSceneInLevel()){
             ui->stackedWidget->setCurrentIndex(0);
             banner->setVisible(true);
+            game->saveProgress();
         }
         else{
             game->lastPainted->sceneImg++;
@@ -94,7 +96,20 @@ void Widget::setDeveloperImages()
     movie->start();
 }
 
-void Widget::on_label_clicked()
+void Widget::setSceneByNewTask(GameTask *gameTask)
+{
+    GameTask *task=gameTask;
+    if (task==NULL){
+        task=new GameTask(Level::PROLOG,Prolog_scene::Prolog_StartMenuScreen);
+    }
+    gameTask->screenSize=QSize(ui->scene_img_label->width(),ui->scene_img_label->height());
+    State *s=game->drawMeScene(task);
+    game->lastPainted=s;
+    ui->scene_img_label->setPixmap(s->img);
+    ui->scene_text_label->setText(s->gameText);
+}
+
+void Widget::on_label_prolog_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
     banner->setVisible(false);
@@ -105,15 +120,21 @@ void Widget::on_label_clicked()
     QWidget::update();
 }
 
-void Widget::setSceneByNewTask(GameTask *gameTask)
+void Widget::updateGameProgressUI()
 {
-    GameTask *task=gameTask;
-    if (task==NULL){
-        task=new GameTask(Level::prolog,Prolog_scene::Prolog_StartMenuScreen);
+    ui->label_prolog->setText("Пролог");
+    ui->label_walk->setText("Прогулка");
+    ui->label_road->setText("Поход");
+    ui->label_journey->setText("Путешествие");
+    if (Progress::progressExist()){
+        //load from file
+        game->loadProgress();
+        switch (game->lastPainted->level) {
+            case(Level::VOYAGE):{ui->label_journey->setText("Путешествие🗸");}
+            case(Level::ZOO):{ui->label_road->setText("Поход🗸");}
+            case(Level::TEA_WALK):{ui->label_walk->setText("Прогулка🗸");}
+            case(Level::PROLOG):{ui->label_prolog->setText("Пролог🗸");}
+        }
     }
-    gameTask->screenSize=QSize(ui->scene_img_label->width(),ui->scene_img_label->height());
-    State *s=game->drawMeScene(task);
-    game->lastPainted=s;
-    ui->scene_img_label->setPixmap(s->img);
-    ui->scene_text_label->setText(s->gameText);
 }
+

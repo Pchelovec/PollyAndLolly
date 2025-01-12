@@ -2,7 +2,7 @@
 
 GameTask::GameTask(QObject *parent) : QObject(parent)
 {
-    this->level=Level::prolog;
+    this->level=Level::PROLOG;
     this->scene=Prolog_scene::Prolog_SinglePollyScene;
     this->screenSize = QSize(default_w,default_h);
 }

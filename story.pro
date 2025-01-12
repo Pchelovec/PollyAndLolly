@@ -43,7 +43,8 @@ HEADERS += \
     level.h \
     clickablelabel.h \
     textedstory.h \
-    patched_game_painter.h
+    patched_game_painter.h \
+    progress.h
 
 FORMS += \
         widget.ui
@@ -58,7 +59,7 @@ DISTFILES += \
     android/gradlew.bat \
     android/src/org/qtproject/QtAdMobActivity.java
 
-QMAKE_LINK+=-nostdlib++
+#QMAKE_LINK+=-nostdlib++
 CONFIG += mobility
 MOBILITY = 
 

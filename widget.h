@@ -23,8 +23,9 @@ public:
     
     void loadAds();
     
+    
 private slots:
-    void on_label_clicked();
+    void on_label_prolog_clicked();
 
 private:
     Ui::Widget *ui;
@@ -32,6 +33,7 @@ private:
     QmlBanner *banner;
 
     void setSceneByNewTask(GameTask * gameTask);
+    void updateGameProgressUI();
 
     // QWidget interface
 protected:

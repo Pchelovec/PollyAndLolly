@@ -1,15 +1,15 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-//#include "gametask.h"
 #include<QDebug>
 enum Level{
-    prolog,
-    walk,
-    journey,
-    voyage
+    PROLOG,
+    TEA_WALK,
+    ZOO,
+    VOYAGE
 };
 
+//Scenes for prolog
 enum Prolog_scene{
     Prolog_StartMenuScreen,
     Prolog_SinglePollyScene,
@@ -22,11 +22,35 @@ enum Prolog_scene{
     Prolog_PollyRealizatorMod,
     Prolog_PollyFindLolly,
     Prolog_LollyMeetPolly,
-    Prolog_LastFrase
+    Prolog_FinalPrologFrase
 };
 inline Prolog_scene& operator++(Prolog_scene& mode, const int){
-        qDebug()<<"MODE"<<mode;
+        qDebug()<<"Increment prolog SCENE"<<mode;
         mode = static_cast<Prolog_scene>((mode + 1));
+        return mode;
+}
+
+//Scenes for teaWalk
+enum TeaWalk_scene{
+    TeaWalk_levelIintro,
+    TeaWalk_LookingForAdventure,
+    TeaWalk_FindCoin1,
+    TeaWalk_goingToTheCaffe,
+    TeaWalk_arriveToCaffe,
+    TeaWalk_findCoin2,
+    TeaWalk_teaOrder,
+    TeaWalk_paiCoin,
+    TeaWalk_teaArrived,
+    TeaWalk_toTheWindow,
+    TeaWalk_preOrderTea2,
+    TeaWalk_orderTea2,
+    TeaWalk_allTeaOrdered,
+    TeaWalk_leaveCaffe,
+    TeaWalk_homeWaitingScene
+};
+inline TeaWalk_scene& operator++(TeaWalk_scene& mode, const int){
+        qDebug()<<"Increment prolog SCENE"<<mode;
+        mode = static_cast<TeaWalk_scene>((mode + 1));
         return mode;
 }
 #endif // LEVEL_H

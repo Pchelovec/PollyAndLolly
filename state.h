@@ -19,5 +19,6 @@ public:
 private:
 
 };
-
+//QDataStream &operator<<(QDataStream &out, const State &progress);
+//QDataStream &operator>>(QDataStream &in, State &progress);
 #endif // STATE_H

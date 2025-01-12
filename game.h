@@ -5,7 +5,7 @@
 #include <QPixmap>
 #include "state.h"
 #include "gametask.h"
-
+#include "progress.h"
 class Game : public QObject
 {
     Q_OBJECT
@@ -20,6 +20,8 @@ public:
 
     State* drawProlog(GameTask *task);
     bool isLastSceneInLevel();
+    void saveProgress();
+    void loadProgress();
 
 private:
     QPixmap firstBackground;
