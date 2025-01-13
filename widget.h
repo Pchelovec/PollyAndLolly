@@ -29,6 +29,10 @@ public:
 private slots:
     void on_label_prolog_clicked();
 
+    void on_pushButton_clicked();
+
+    void on_label_walk_clicked();
+
 private:
     Ui::Widget *ui;
     Game *game;

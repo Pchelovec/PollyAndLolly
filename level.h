@@ -39,7 +39,7 @@ enum TeaWalk_scene{
     TeaWalk_arriveToCaffe,
     TeaWalk_findCoin2,
     TeaWalk_teaOrder,
-    TeaWalk_paiCoin,
+    TeaWalk_payCoin,
     TeaWalk_teaArrived,
     TeaWalk_toTheWindow,
     TeaWalk_preOrderTea2,

@@ -16,7 +16,7 @@ public:
 
     static QStringList teaWalkText;
     static QString getTeaWalkText(int row){
-        return prologText.at(row);
+        return teaWalkText.at(row);
     }
 };
 
@@ -36,21 +36,21 @@ QStringList textedStory::prologText=QStringList({"Однажды Polly по тр
 
 QStringList textedStory::teaWalkText=QStringList({"Polly и Lolly на поле гуляли",
                                                  "Polly и Lolly развлечений искали",
-                                                 "На поле этом Polly и Molly монетку нашли",
-                                                 "Polly и Lolly в кафе чай пить пошли",
+                                                 "На поле этом Polly и Molly \nмонетку нашли",
+                                                 "Polly и Lolly в кафе чай \nпить пошли",
                                                  "",
-                                                 "Когда Polly и Lolly к кафе пришли",
-                                                 "Они еще манетку нашли",
+                                                 "Когда Polly и Lolly к \nкафе пришли",
+                                                 "Они еще монетку нашли",
                                                  "",
                                                  "У жирафа они чай заказали",
-                                                 "Одну манетку жирафу отдали",
+                                                 "Одну монетку жирафу отдали",
                                                  "",
-                                                 "Чай принесли",
-                                                 "К окну Polly и Lolly чай пить пошли",
+                                                 "Когда чай принесли",
+                                                 "К окну Polly и Lolly чай \nпить пошли",
                                                  "Чай допивали",
                                                  "Второй чай заказали",
                                                  "",
-                                                 "Когда весь чай в кафе повыпивали",
+                                                 "Когда весь чай в кафе \nповыпивали",
                                                  "Polly и Lolly домой поскакали",
                                                  "",
                                                  "Ведь их дома уже ждали!"});

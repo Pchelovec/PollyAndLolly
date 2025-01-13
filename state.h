@@ -32,6 +32,8 @@ public:
     QString gameText;
     QPixmap img;
 
+    void setLevelAndScene(Level l, Screen s);
     void incrementScene();
+    void incrementLevel();
 };
 #endif // STATE_H

@@ -17,5 +17,13 @@
         <file>img/background0.png</file>
         <file>img/cloud.png</file>
         <file>img/grassBackground.png</file>
+        <file>img/level1/ball_activity.png</file>
+        <file>img/level1/barmen.png</file>
+        <file>img/level1/caffe.png</file>
+        <file>img/level1/coin1.png</file>
+        <file>img/level1/coin2.png</file>
+        <file>img/level1/interer.webp</file>
+        <file>img/level1/menu.png</file>
+        <file>img/level1/pretty_caffe.png</file>
     </qresource>
 </RCC>

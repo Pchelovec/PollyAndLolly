@@ -147,6 +147,83 @@ QPixmap *Game::drawPollyHoneyDiller(GameTask *task)
     return gamePainter->process();
 }
 
+QPixmap* Game::drawSceneSheepsWithBallActivity_TeaWalk(GameTask *task)
+{
+    //prepare extra screenSize calculation
+    QSize sheepSize=QSize((task->screenSize.width()/4),task->screenSize.height()/4);
+    QSize ballImgSize=QSize((task->screenSize.width()/4),task->screenSize.height()/4);
+    //draw
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getResImg(":/img/grassBackground.png",task->screenSize));
+    gamePainter->draw((task->screenSize.width()/4)*2,(task->screenSize.height()/4)*3,getResImg(":/img/level1/ball_activity.png",ballImgSize));
+    gamePainter->draw(0,((task->screenSize.height()/4)*3),getSheepPolly(sheepSize));
+    gamePainter->draw((task->screenSize.width()/4),((task->screenSize.height()/4)*3),getSheepLolly(sheepSize));
+    return gamePainter->process();
+}
+
+QPixmap* Game::drawSceneSheepsFindCoin1_TeaWalk(GameTask *task)
+{
+    //prepare extra screenSize calculation
+    QSize sheepSize=QSize((task->screenSize.width()/4),task->screenSize.height()/4);
+    QSize ballImgSize=QSize((task->screenSize.width()/4),task->screenSize.height()/4);
+    //draw
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getResImg(":/img/grassBackground.png",task->screenSize));
+    gamePainter->draw((task->screenSize.width()/4)*2,(task->screenSize.height()/4)*3,getResImg(":/img/level1/coin1.png",ballImgSize));
+    gamePainter->draw((task->screenSize.width()/4)*3,(task->screenSize.height()/4)*3,getResImg(":/img/level1/ball_activity.png",ballImgSize));
+    gamePainter->draw(0,((task->screenSize.height()/4)*3),getSheepPolly(sheepSize));
+    gamePainter->draw((task->screenSize.width()/4),((task->screenSize.height()/4)*3),getSheepLolly(sheepSize));
+    return gamePainter->process();
+}
+
+//todo shheps in moving
+QPixmap *Game::getCoupleSheepOngoingToCafe(GameTask *task)
+{
+    //prepare extra screenSize calculation
+    QSize polly_lolly_screen=QSize((task->screenSize.width()/2),task->screenSize.height());
+
+    //draw
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0, 0, getSheepPolly(polly_lolly_screen));
+    gamePainter->draw((task->screenSize.width()/2),0,getSheepLolly(polly_lolly_screen));
+    return gamePainter->process();
+}
+
+QPixmap *Game::caffeIntro(GameTask *task)
+{
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getResImg(":/img/level1/pretty_caffe.png",task->screenSize));
+    return gamePainter->process();
+}
+
+QPixmap *Game::caffeIntroWithCoin(GameTask *task)
+{
+    QSize coins=QSize((task->screenSize.width()/4),task->screenSize.height()/4);
+
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getResImg(":/img/level1/pretty_caffe.png",task->screenSize));
+    gamePainter->draw(0,(task->screenSize.height()/4)*3,getResImg(":/img/level1/coin2.png",coins));
+    return gamePainter->process();
+}
+
+QPixmap *Game::caffeInterer(GameTask *task)
+{
+    QSize barmenSize=QSize(task->screenSize.width()/2,task->screenSize.height());
+    QSize sheepSize=QSize((task->screenSize.width()/4),task->screenSize.height()/4);
+
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getResImg(":/img/level1/interer.webp",task->screenSize));
+    gamePainter->draw(0,0,getResImg(":/img/level1/barmen.png",barmenSize));
+    gamePainter->draw((task->screenSize.width()/4)*3,(task->screenSize.height()/4)*3,getSheepPolly(sheepSize));
+    gamePainter->draw((task->screenSize.width()/4)*2,(task->screenSize.height()/4)*3,getSheepLolly(sheepSize));
+    return gamePainter->process();
+}
 Scene* Game::drawProlog(GameTask *task)
 {
     Scene* sceneToPaint=new Scene();
@@ -166,16 +243,43 @@ Scene* Game::drawProlog(GameTask *task)
     case Prolog_PollyFindLolly:{sceneToPaint->img=*getSinglePolly(task);sceneToPaint->gameText=textedStory::getPrologText(10);break;}
     case Prolog_LollyMeetPolly:{sceneToPaint->img=*getCoupleSheep(task);sceneToPaint->gameText=textedStory::getPrologText(11);break;}
     case Prolog_FinalPrologFrase:{sceneToPaint->img=*getCoupleSheep(task);sceneToPaint->gameText=textedStory::getPrologText(12);break;}
-
+//    default:{sceneToPaint->img=*drawScene0_Prolog(task);break;}
     }
 
+    return sceneToPaint;
+}
+
+Scene *Game::drawTeaWalkLevel(GameTask *task)
+{
+    Scene* sceneToPaint=new Scene();
+    sceneToPaint->level=task->level;
+    sceneToPaint->screen=task->screen;
+    //    QPixmap *result;
+    switch (task->screen.getScreen()) {
+    case TeaWalk_levelIintro:{sceneToPaint->img=*drawSceneSheepsWithBallActivity_TeaWalk(task);sceneToPaint->gameText=textedStory::getTeaWalkText(0);break;}
+    case TeaWalk_LookingForAdventure:{sceneToPaint->img=*drawSceneSheepsWithBallActivity_TeaWalk(task);sceneToPaint->gameText=textedStory::getTeaWalkText(1);break;}
+    case TeaWalk_FindCoin1:{sceneToPaint->img=*drawSceneSheepsFindCoin1_TeaWalk(task);sceneToPaint->gameText=textedStory::getTeaWalkText(2);break;}
+    case TeaWalk_goingToTheCaffe:{sceneToPaint->img=*getCoupleSheepOngoingToCafe(task);sceneToPaint->gameText=textedStory::getTeaWalkText(3);break;}
+    case TeaWalk_arriveToCaffe:{sceneToPaint->img=*caffeIntro(task);sceneToPaint->gameText=textedStory::getTeaWalkText(5);break;}
+    case TeaWalk_findCoin2:{sceneToPaint->img=*caffeIntroWithCoin(task);sceneToPaint->gameText=textedStory::getTeaWalkText(6);break;}
+    case TeaWalk_teaOrder:{sceneToPaint->img=*caffeInterer(task);sceneToPaint->gameText=textedStory::getTeaWalkText(8);break;}
+    case TeaWalk_payCoin:{sceneToPaint->img=*caffeInterer(task);sceneToPaint->gameText=textedStory::getTeaWalkText(9);break;}
+    case TeaWalk_teaArrived:{sceneToPaint->img=*caffeInterer(task);sceneToPaint->gameText=textedStory::getTeaWalkText(11);break;}
+    case TeaWalk_toTheWindow:{sceneToPaint->img=*caffeInterer(task);sceneToPaint->gameText=textedStory::getTeaWalkText(12);break;}
+    case TeaWalk_preOrderTea2:{sceneToPaint->img=*caffeInterer(task);sceneToPaint->gameText=textedStory::getTeaWalkText(13);break;}
+    case TeaWalk_orderTea2:{sceneToPaint->img=*caffeInterer(task);sceneToPaint->gameText=textedStory::getTeaWalkText(14);break;}
+    case TeaWalk_allTeaOrdered:{sceneToPaint->img=*caffeInterer(task);sceneToPaint->gameText=textedStory::getTeaWalkText(16);break;}
+    case TeaWalk_leaveCaffe:{sceneToPaint->img=*caffeIntro(task);sceneToPaint->gameText=textedStory::getTeaWalkText(17);break;}
+    case TeaWalk_homeWaitingScene:{sceneToPaint->img=*caffeIntro(task);sceneToPaint->gameText=textedStory::getTeaWalkText(19);break;}
+    }
     return sceneToPaint;
 }
 
 bool Game::isLastSceneInLevel()
 {
     //todo check for level
-    if (lastPainted->screen.getScreen()==Prolog_scene::Prolog_FinalPrologFrase){return true;}
+    if ((lastPainted->level==Level::PROLOG) and(lastPainted->screen.getScreen()==Prolog_scene::Prolog_FinalPrologFrase)){return true;}
+    if ((lastPainted->level==Level::TEA_WALK) and (lastPainted->screen.getScreen()==TeaWalk_scene::TeaWalk_homeWaitingScene)){return true;}
     return false;
 }
 
@@ -194,6 +298,8 @@ Scene* Game::drawByTask(GameTask *task)
     Scene *sceneToPaint;
     if (task->level==Level::PROLOG)
         sceneToPaint=drawProlog(task);
+    if (task->level==Level::TEA_WALK)
+        sceneToPaint=drawTeaWalkLevel(task);
     return sceneToPaint;
 }
 

@@ -17,13 +17,18 @@ public:
     static QString filename;
 
     static bool saveProgress(Scene *state){
-
+        bool result;
         QFile file( filename );
         if ( file.open(QIODevice::ReadWrite) )
         {
+            qDebug()<<"Progerss save level"<<state->level<<" scene-"<<state->screen.getScreen();
             QTextStream stream( &file );
-            stream << state->level << endl;
+            stream << state->level <<endl;
+            stream<<state->screen.getScreen();
+            result=true;
         }
+        file.close();
+        return result;
     }
 
     static bool loadProgress(Scene *state){
@@ -31,11 +36,12 @@ public:
         QFile file( filename );
         if ( file.open(QIODevice::ReadWrite) )
         {
-            int level;
+            int level; int scene;
             QTextStream stream( &file );
             stream>>level;
-            state->level=(Level)level;
-            qDebug()<<"Dessirialized "<<state->level;
+            stream>>scene;
+            qDebug()<<"Dessirialized level-"<<state->level<<" ,scene-"<<scene;
+            state->setLevelAndScene((Level)level,Screen(scene));
             return true;
         }
         return false;

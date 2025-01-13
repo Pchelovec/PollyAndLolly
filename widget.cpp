@@ -83,6 +83,7 @@ void Widget::mousePressEvent(QMouseEvent *event)
             ui->stackedWidget->setCurrentIndex(0);
             banner->setVisible(true);
             game->saveProgress();
+            updateGameProgressUI();
         }
         else{
             //todo update incrementation by new mitod like 'next'
@@ -118,9 +119,14 @@ void Widget::setSceneByNewTask(GameTask *gameTask)
 
 void Widget::on_label_prolog_clicked()
 {
+    //important
+    if (game->lastPainted->level>Level::PROLOG) return;
+    if (game->lastPainted->level==Level::PROLOG and game->lastPainted->screen.getScreen()!=0)return;//already painted
+
     ui->stackedWidget->setCurrentIndex(1);
     banner->setVisible(false);
 
+    game->lastPainted->setLevelAndScene(Level::PROLOG,Screen(0));
     setDeveloperImages();
 
     game->changed=true;
@@ -137,11 +143,33 @@ void Widget::updateGameProgressUI()
         //load from file
         game->loadProgress();
         switch (game->lastPainted->level) {
-            case(Level::VOYAGE):{ui->label_journey->setText("Путешествие🗸");}
-            case(Level::ZOO):{ui->label_road->setText("Поход🗸");}
-            case(Level::TEA_WALK):{ui->label_walk->setText("Прогулка🗸");}
-            case(Level::PROLOG):{ui->label_prolog->setText("Пролог🗸");}
+        case(Level::VOYAGE):{ui->label_journey->setText("Путешествие🗸");}
+        case(Level::ZOO):{ui->label_road->setText("Поход🗸");}
+        case(Level::TEA_WALK):{ui->label_walk->setText("Прогулка🗸");}
+        case(Level::PROLOG):{ui->label_prolog->setText("Пролог🗸");}
         }
     }
 }
 
+
+void Widget::on_pushButton_clicked()
+{
+    Progress::removeProgress();
+}
+
+void Widget::on_label_walk_clicked()
+{
+    if ((game->isLastSceneInLevel())and (game->lastPainted->level==Level::PROLOG)){
+        game->lastPainted->incrementLevel();
+
+        if (game->lastPainted->level==Level::TEA_WALK){
+            ui->stackedWidget->setCurrentIndex(1);
+            banner->setVisible(false);
+
+            game->lastPainted->setLevelAndScene(Level::TEA_WALK,Screen(0));
+            setSceneByNewTask(new GameTask(game->lastPainted->level,game->lastPainted->screen));
+        }
+        game->changed=true;
+        QWidget::update();
+    }
+}

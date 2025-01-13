@@ -31,7 +31,7 @@ private:
 
     QPixmap getResImg(QString path,QSize screen_size);
 
-
+    //level 1 scenes
     void taskInfo(GameTask * task);
     QPixmap* drawScene0_Prolog(GameTask *task);
     QPixmap* getSinglePolly(GameTask *task);
@@ -41,10 +41,18 @@ private:
     QPixmap* drawPollyBeeHouse(GameTask *task);
     QPixmap* drawPollyHoneyDiller(GameTask *task);
 
+    //level 2 scenes
+    QPixmap* drawSceneSheepsWithBallActivity_TeaWalk(GameTask *task);
+    QPixmap* drawSceneSheepsFindCoin1_TeaWalk(GameTask *task);
+    QPixmap* getCoupleSheepOngoingToCafe(GameTask *task);
+    QPixmap* caffeIntro(GameTask *task);
+    QPixmap* caffeIntroWithCoin(GameTask *task);
+    QPixmap* caffeInterer(GameTask *task);
+
 
     Scene* drawByTask(GameTask *task);
     Scene* drawProlog(GameTask *task);
-
+    Scene* drawTeaWalkLevel(GameTask *task);
 };
 
 #endif // GAME_H
