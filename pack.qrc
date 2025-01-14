@@ -25,5 +25,15 @@
         <file>img/level1/interer.webp</file>
         <file>img/level1/menu.png</file>
         <file>img/level1/pretty_caffe.png</file>
+        <file>img/level2/bird.png</file>
+        <file>img/level2/campaing.png</file>
+        <file>img/level2/elephant.png</file>
+        <file>img/level2/lion.png</file>
+        <file>img/level2/zoo.png</file>
+        <file>img/level2/zoo_derector.webp</file>
+        <file>img/level3/suitcase.webp</file>
+        <file>img/level3/LollyList.webp</file>
+        <file>img/level3/PollyList.webp</file>
+        <file>img/level3/TrollyList.webp</file>
     </qresource>
 </RCC>

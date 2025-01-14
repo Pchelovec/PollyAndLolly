@@ -28,10 +28,11 @@ private:
     QPixmap getBacgroundMainScene(QSize screen_size);
     QPixmap getSheepPolly(QSize screen_size);
     QPixmap getSheepLolly(QSize screen_size);
+    QPixmap getSheepTrolly(QSize screen_size);
 
     QPixmap getResImg(QString path,QSize screen_size);
 
-    //level 1 scenes
+    //level 1(prolog) scenes
     void taskInfo(GameTask * task);
     QPixmap* drawScene0_Prolog(GameTask *task);
     QPixmap* getSinglePolly(GameTask *task);
@@ -41,7 +42,7 @@ private:
     QPixmap* drawPollyBeeHouse(GameTask *task);
     QPixmap* drawPollyHoneyDiller(GameTask *task);
 
-    //level 2 scenes
+    //level 2(tea_walk) scenes
     QPixmap* drawSceneSheepsWithBallActivity_TeaWalk(GameTask *task);
     QPixmap* drawSceneSheepsFindCoin1_TeaWalk(GameTask *task);
     QPixmap* getCoupleSheepOngoingToCafe(GameTask *task);
@@ -49,10 +50,29 @@ private:
     QPixmap* caffeIntroWithCoin(GameTask *task);
     QPixmap* caffeInterer(GameTask *task);
 
+    //level 3(zoo) scenes
+    QPixmap* drawCompaimgScene(GameTask *task,bool isFinalScene);
+    QPixmap* drawZoo(GameTask *task);
+    QPixmap* mainHeroWithElephant(GameTask *task);
+    QPixmap* mainHeroWithLion(GameTask *task);
+    QPixmap* mainHeroWithBird(GameTask *task);
+    QPixmap* PollyWithLollyInZoo(GameTask *task);
+    QPixmap* drawZooDirector(GameTask *task);
+    QPixmap* drawPollyLollyTrollyInZoo(GameTask *task);
+    QPixmap* drawZooSummary(GameTask *task);
+
+    //level 4(voyage) scenes
+    QPixmap* sheepsPackSuitcases(GameTask *task);
+    QPixmap* sheepPollyItem(GameTask *task);
+    QPixmap* sheepLollyItem(GameTask *task);
+    QPixmap* sheepTrollyItem(GameTask *task);
+
 
     Scene* drawByTask(GameTask *task);
     Scene* drawProlog(GameTask *task);
     Scene* drawTeaWalkLevel(GameTask *task);
+    Scene* drawZooLevel(GameTask *task);
+    Scene* drawVoyageLevel(GameTask *task);
 };
 
 #endif // GAME_H

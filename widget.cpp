@@ -6,6 +6,7 @@
 #include<QMovie>
 #include"level.h"
 #include<QScreen>
+
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
@@ -15,6 +16,7 @@ Widget::Widget(QWidget *parent) :
     ui->stackedWidget->setCurrentIndex(0);
     updateGameProgressUI();
     loadAds();
+    loadInterstitialAd();
     qDebug()<<"Welcome to Polly And Lolly Lyric Story!";
 }
 
@@ -38,6 +40,14 @@ void Widget::loadAds()
     banner->setTestDeviceId("41E647017EBEBB0650DAE627391B7A43");
     banner->loadBanner();
     banner->setVisible(true);
+}
+
+void Widget::loadInterstitialAd()
+{
+    interstitial=new QmlInterstitialAd();
+    interstitial->setInterstitialAdUnitId("ca-app-pub-3940256099942544/1033173712");
+    interstitial->setInterstitialAdTestDeviceId("41E647017EBEBB0650DAE627391B7A43");
+    interstitial->loadInterstitialAd();
 }
 void Widget::drawScene0(QPaintEvent *pe)
 {
@@ -74,6 +84,11 @@ GameTask * Widget::gameTaskForNextScene()
     return gameTask;
 }
 
+void Widget::levelEndAds()
+{
+    interstitial->showInterstitialAd();
+}
+
 void Widget::mousePressEvent(QMouseEvent *event)
 {
     qDebug()<<"Mouse pressed";
@@ -81,6 +96,7 @@ void Widget::mousePressEvent(QMouseEvent *event)
     if (ui->stackedWidget->currentIndex()==1){
         if (game->isLastSceneInLevel()){
             ui->stackedWidget->setCurrentIndex(0);
+            levelEndAds();
             banner->setVisible(true);
             game->saveProgress();
             updateGameProgressUI();
@@ -159,6 +175,7 @@ void Widget::on_pushButton_clicked()
 
 void Widget::on_label_walk_clicked()
 {
+    //check prev level
     if ((game->isLastSceneInLevel())and (game->lastPainted->level==Level::PROLOG)){
         game->lastPainted->incrementLevel();
 
@@ -167,6 +184,42 @@ void Widget::on_label_walk_clicked()
             banner->setVisible(false);
 
             game->lastPainted->setLevelAndScene(Level::TEA_WALK,Screen(0));
+            setSceneByNewTask(new GameTask(game->lastPainted->level,game->lastPainted->screen));
+        }
+        game->changed=true;
+        QWidget::update();
+    }
+}
+
+void Widget::on_label_road_clicked()
+{
+    if ((game->isLastSceneInLevel())and(game->lastPainted->level==Level::TEA_WALK))
+    {
+        game->lastPainted->incrementLevel();
+
+        if (game->lastPainted->level==Level::ZOO){
+            ui->stackedWidget->setCurrentIndex(1);
+            banner->setVisible(false);
+
+            game->lastPainted->setLevelAndScene(Level::ZOO,Screen(0));
+            setSceneByNewTask(new GameTask(game->lastPainted->level,game->lastPainted->screen));
+        }
+        game->changed=true;
+        QWidget::update();
+    }
+}
+
+void Widget::on_label_journey_clicked()
+{
+    if (game->isLastSceneInLevel()and game->lastPainted->level==Level::ZOO){
+        game->lastPainted->incrementLevel();
+
+        if (game->lastPainted->level==Level::VOYAGE)
+        {
+            ui->stackedWidget->setCurrentIndex(1);
+            banner->setVisible(false);
+
+            game->lastPainted->setLevelAndScene(Level::VOYAGE,Screen(0));
             setSceneByNewTask(new GameTask(game->lastPainted->level,game->lastPainted->screen));
         }
         game->changed=true;

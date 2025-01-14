@@ -34,6 +34,11 @@ QPixmap Game::getSheepLolly(QSize screen_size)
     return lolly.scaled(screen_size.width(),screen_size.height());
 }
 
+QPixmap Game::getSheepTrolly(QSize screen_size)
+{
+    return trolly.scaled(screen_size.width(),screen_size.height());
+}
+
 QPixmap Game::getResImg(QString path, QSize screen_size)
 {
     QPixmap pixmap;
@@ -224,6 +229,151 @@ QPixmap *Game::caffeInterer(GameTask *task)
     gamePainter->draw((task->screenSize.width()/4)*2,(task->screenSize.height()/4)*3,getSheepLolly(sheepSize));
     return gamePainter->process();
 }
+
+QPixmap *Game::drawCompaimgScene(GameTask *task,bool isFinalScene)
+{
+    QSize sheepSize=QSize((task->screenSize.width()/4),task->screenSize.height()/4);
+
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getResImg(":/img/level2/campaing.png",task->screenSize));
+    gamePainter->draw((task->screenSize.width()/4)*3,(task->screenSize.height()/4)*3,getSheepPolly(sheepSize));
+    gamePainter->draw((task->screenSize.width()/4)*2,(task->screenSize.height()/4)*3,getSheepLolly(sheepSize));
+    if (isFinalScene){gamePainter->draw((task->screenSize.width()/4),(task->screenSize.height()/4)*3,getSheepTrolly(sheepSize));}
+    return gamePainter->process();
+}
+
+QPixmap *Game::drawZoo(GameTask *task)
+{
+    QSize sheepSize=QSize((task->screenSize.width()/4),task->screenSize.height()/4);
+
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getResImg(":/img/level2/zoo.png",task->screenSize));
+    gamePainter->draw((task->screenSize.width()/4)*3,(task->screenSize.height()/4)*3,getSheepPolly(sheepSize));
+    gamePainter->draw((task->screenSize.width()/4)*2,(task->screenSize.height()/4)*3,getSheepLolly(sheepSize));
+    return gamePainter->process();
+}
+
+QPixmap *Game::mainHeroWithElephant(GameTask *task)
+{
+    QSize sheepSize=QSize((task->screenSize.width()/4),task->screenSize.height()/4);
+
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getResImg(":/img/level2/elephant.png",task->screenSize));
+    gamePainter->draw((task->screenSize.width()/4)*3,(task->screenSize.height()/4)*3,getSheepPolly(sheepSize));
+    gamePainter->draw((task->screenSize.width()/4)*2,(task->screenSize.height()/4)*3,getSheepLolly(sheepSize));
+    return gamePainter->process();
+}
+
+QPixmap *Game::mainHeroWithLion(GameTask *task)
+{
+    QSize sheepSize=QSize((task->screenSize.width()/4),task->screenSize.height()/4);
+
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getResImg(":/img/level2/lion.png",task->screenSize));
+    gamePainter->draw((task->screenSize.width()/4),(task->screenSize.height()/4)*3,getSheepPolly(sheepSize));
+    gamePainter->draw(0,(task->screenSize.height()/4)*3,getSheepLolly(sheepSize));
+    return gamePainter->process();
+}
+
+QPixmap *Game::mainHeroWithBird(GameTask *task)
+{
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getResImg(":/img/level2/bird.png",task->screenSize));
+    return gamePainter->process();
+}
+
+QPixmap *Game::PollyWithLollyInZoo(GameTask *task)
+{
+    //prepare extra screenSize calculation
+    QSize polly_lolly_screen=QSize((task->screenSize.width()/2),task->screenSize.height());
+
+    //draw
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0, 0, getSheepPolly(polly_lolly_screen));
+    gamePainter->draw((task->screenSize.width()/2),0,getSheepLolly(polly_lolly_screen));
+    return gamePainter->process();
+}
+
+QPixmap *Game::drawZooDirector(GameTask *task)
+{
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getResImg(":/img/level2/zoo_derector.webp",task->screenSize));
+    return gamePainter->process();
+}
+
+QPixmap *Game::drawPollyLollyTrollyInZoo(GameTask *task)
+{
+    QSize sheepSize=QSize((task->screenSize.width()/4),task->screenSize.height()/4);
+
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getResImg(":/img/background.png",task->screenSize));
+    gamePainter->draw((task->screenSize.width()/4)*3,(task->screenSize.height()/4)*3,getSheepPolly(sheepSize));
+    gamePainter->draw((task->screenSize.width()/4)*2,(task->screenSize.height()/4)*3,getSheepLolly(sheepSize));
+    gamePainter->draw((task->screenSize.width()/4),(task->screenSize.height()/4)*3,getSheepTrolly(sheepSize));
+    return gamePainter->process();
+}
+
+QPixmap *Game::drawZooSummary(GameTask *task)
+{
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getResImg(":/img/level2/zoo.png",task->screenSize));
+    return gamePainter->process();
+}
+
+QPixmap *Game::sheepsPackSuitcases(GameTask *task)
+{
+    QSize sheepSize=QSize((task->screenSize.width()/4),task->screenSize.height()/4);
+
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getResImg(":/img/level3/suitcase.webp",task->screenSize));
+    gamePainter->draw((task->screenSize.width()/4)*3,(task->screenSize.height()/4)*3,getSheepPolly(sheepSize));
+    gamePainter->draw((task->screenSize.width()/4)*2,(task->screenSize.height()/4)*3,getSheepLolly(sheepSize));
+    gamePainter->draw((task->screenSize.width()/4),(task->screenSize.height()/4)*3,getSheepTrolly(sheepSize));
+    return gamePainter->process();
+}
+
+QPixmap *Game::sheepPollyItem(GameTask *task)
+{
+    QSize sheepSize=QSize((task->screenSize.width()/2),task->screenSize.height());
+
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getSheepPolly(sheepSize));
+    gamePainter->draw((task->screenSize.width()/2),0,getResImg(":/img/level3/PollyList.webp",sheepSize));
+    return gamePainter->process();
+}
+
+QPixmap *Game::sheepLollyItem(GameTask *task)
+{
+    QSize sheepSize=QSize((task->screenSize.width()/2),task->screenSize.height());
+
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getSheepLolly(sheepSize));
+    gamePainter->draw((task->screenSize.width()/2),0,getResImg(":/img/level3/LollyList.webp",sheepSize));
+    return gamePainter->process();
+}
+
+QPixmap *Game::sheepTrollyItem(GameTask *task)
+{
+    QSize sheepSize=QSize((task->screenSize.width()/2),task->screenSize.height());
+
+    PatchedGamePainter *gamePainter=new PatchedGamePainter(task->screenSize);
+    gamePainter->create();
+    gamePainter->draw(0,0,getSheepTrolly(sheepSize));
+    gamePainter->draw((task->screenSize.width()/2),0,getResImg(":/img/level3/TrollyList.webp",sheepSize));
+    return gamePainter->process();
+}
 Scene* Game::drawProlog(GameTask *task)
 {
     Scene* sceneToPaint=new Scene();
@@ -243,7 +393,6 @@ Scene* Game::drawProlog(GameTask *task)
     case Prolog_PollyFindLolly:{sceneToPaint->img=*getSinglePolly(task);sceneToPaint->gameText=textedStory::getPrologText(10);break;}
     case Prolog_LollyMeetPolly:{sceneToPaint->img=*getCoupleSheep(task);sceneToPaint->gameText=textedStory::getPrologText(11);break;}
     case Prolog_FinalPrologFrase:{sceneToPaint->img=*getCoupleSheep(task);sceneToPaint->gameText=textedStory::getPrologText(12);break;}
-//    default:{sceneToPaint->img=*drawScene0_Prolog(task);break;}
     }
 
     return sceneToPaint;
@@ -275,11 +424,61 @@ Scene *Game::drawTeaWalkLevel(GameTask *task)
     return sceneToPaint;
 }
 
+Scene *Game::drawZooLevel(GameTask *task)
+{
+    Scene *sceneToPaint=new Scene();
+    sceneToPaint->level=task->level;
+    sceneToPaint->screen=task->screen;
+
+    //    QPixmap *result;
+    switch (task->screen.getScreen()) {
+    case ZOO_plans:{sceneToPaint->img=*drawCompaimgScene(task,false);sceneToPaint->gameText=textedStory::getZooText(0);break;}
+    case ZOO_enteredToTheZoo:{sceneToPaint->img=*drawZoo(task);sceneToPaint->gameText=textedStory::getZooText(1);break;}
+    case ZOO_openDayPromo:{sceneToPaint->img=*drawZoo(task);sceneToPaint->gameText=textedStory::getZooText(2);break;}
+    case ZOO_observing:{sceneToPaint->img=*drawZoo(task);sceneToPaint->gameText=textedStory::getZooText(3);break;}
+    case ZOO_elephant:{sceneToPaint->img=*mainHeroWithElephant(task);sceneToPaint->gameText=textedStory::getZooText(5);break;}
+    case ZOO_lion:{sceneToPaint->img=*mainHeroWithLion(task);sceneToPaint->gameText=textedStory::getZooText(6);break;}
+    case ZOO_birds:{sceneToPaint->img=*mainHeroWithBird(task);sceneToPaint->gameText=textedStory::getZooText(7);break;}
+    case ZOO_director:{sceneToPaint->img=*PollyWithLollyInZoo(task);sceneToPaint->gameText=textedStory::getZooText(8);break;}
+    case ZOO_directorLoveAnimals:{sceneToPaint->img=*drawZooDirector(task);sceneToPaint->gameText=textedStory::getZooText(10);break;}
+    case ZOO_directoroveMonkeys:{sceneToPaint->img=*drawZooDirector(task);sceneToPaint->gameText=textedStory::getZooText(11);break;}
+    case ZOO_animalsObserving:{sceneToPaint->img=*PollyWithLollyInZoo(task);sceneToPaint->gameText=textedStory::getZooText(13);break;}
+    case ZOO_aroundWall:{sceneToPaint->img=*PollyWithLollyInZoo(task);sceneToPaint->gameText=textedStory::getZooText(14);break;}
+    case ZOO_TrollyIntro:{sceneToPaint->img=*drawPollyLollyTrollyInZoo(task);sceneToPaint->gameText=textedStory::getZooText(15);break;}
+    case ZOO_PollyLollYTrollyCompany:{sceneToPaint->img=*drawPollyLollyTrollyInZoo(task);sceneToPaint->gameText=textedStory::getZooText(16);break;}
+    case ZOO_3SSheepName:{sceneToPaint->img=getSheepTrolly(task->screenSize);sceneToPaint->gameText=textedStory::getZooText(18);break;}
+    case ZOO_Summary:{sceneToPaint->img=*drawCompaimgScene(task,true);sceneToPaint->gameText=textedStory::getZooText(19);break;}
+    }
+    return sceneToPaint;
+}
+
+Scene *Game::drawVoyageLevel(GameTask *task)
+{
+    Scene *sceneToPaint=new Scene();
+    sceneToPaint->level=task->level;
+    sceneToPaint->screen=task->screen;
+
+    switch (task->screen.getScreen()) {
+    case voyage_packSuitcase:{sceneToPaint->img=*sheepsPackSuitcases(task);sceneToPaint->gameText=textedStory::getVoyageText(0);break;}
+    case voyage_packSuitcaseDescription:{sceneToPaint->img=*sheepsPackSuitcases(task);sceneToPaint->gameText=textedStory::getVoyageText(1);break;}
+    case voyaje_PollyPack:{sceneToPaint->img=getSheepPolly(task->screenSize);sceneToPaint->gameText=textedStory::getVoyageText(3);break;}
+    case voyage_PollyPackItems:{sceneToPaint->img=*sheepPollyItem(task);sceneToPaint->gameText=textedStory::getVoyageText(4);break;}
+    case voyage_LollyPack:{sceneToPaint->img=getSheepLolly(task->screenSize);sceneToPaint->gameText=textedStory::getVoyageText(5);break;}
+    case voyage_LollyPackItems:{sceneToPaint->img=*sheepLollyItem(task);sceneToPaint->gameText=textedStory::getVoyageText(6);break;}
+    case voyage_TrollyPack:{sceneToPaint->img=getSheepTrolly(task->screenSize);sceneToPaint->gameText=textedStory::getVoyageText(7);break;}
+    case voyage_TrollyPackItems:{sceneToPaint->img=*sheepTrollyItem(task);sceneToPaint->gameText=textedStory::getVoyageText(8);break;}
+    }
+
+    return sceneToPaint;
+}
+
 bool Game::isLastSceneInLevel()
 {
     //todo check for level
     if ((lastPainted->level==Level::PROLOG) and(lastPainted->screen.getScreen()==Prolog_scene::Prolog_FinalPrologFrase)){return true;}
     if ((lastPainted->level==Level::TEA_WALK) and (lastPainted->screen.getScreen()==TeaWalk_scene::TeaWalk_homeWaitingScene)){return true;}
+    if ((lastPainted->level==Level::ZOO)and (lastPainted->screen.getScreen()==zoo_scene::ZOO_Summary)){return true;}
+    if ((lastPainted->level==Level::VOYAGE)and (lastPainted->screen.getScreen()==voyage_scene::voyage_TrollyPackItems)){return true;}
     return false;
 }
 
@@ -300,6 +499,10 @@ Scene* Game::drawByTask(GameTask *task)
         sceneToPaint=drawProlog(task);
     if (task->level==Level::TEA_WALK)
         sceneToPaint=drawTeaWalkLevel(task);
+    if (task->level==Level::ZOO)
+        sceneToPaint=drawZooLevel(task);
+    if (task->level==Level::VOYAGE)
+        sceneToPaint=drawVoyageLevel(task);
     return sceneToPaint;
 }
 

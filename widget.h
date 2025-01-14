@@ -4,7 +4,7 @@
 #include <QWidget>
 #include "game.h"
 #include "Admob/QmlBanner.h"
-
+#include"Admob/QmlInterstitialAd.h"
 namespace Ui {
 class Widget;
 }
@@ -20,9 +20,7 @@ public:
     void drawScene0(QPaintEvent *event);
 
     void setDeveloperImages();
-    
-    void loadAds();
-    
+        
     
     GameTask * gameTaskForNextScene();
 
@@ -33,15 +31,25 @@ private slots:
 
     void on_label_walk_clicked();
 
+    void on_label_road_clicked();
+
+    void on_label_journey_clicked();
+
 private:
     Ui::Widget *ui;
     Game *game;
     QmlBanner *banner;
+    QmlInterstitialAd *interstitial;
 
     void setSceneByNewTask(GameTask * gameTask);
     void updateGameProgressUI();
 
     // QWidget interface
+    void loadAds();
+    void loadInterstitialAd();
+
+    void levelEndAds();
+
 protected:
     void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *event);

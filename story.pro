@@ -59,7 +59,7 @@ DISTFILES += \
     android/gradlew.bat \
     android/src/org/qtproject/QtAdMobActivity.java
 
-#QMAKE_LINK+=-nostdlib++
+QMAKE_LINK+=-nostdlib++
 CONFIG += mobility
 MOBILITY = 
 

@@ -49,13 +49,48 @@ enum TeaWalk_scene{
     TeaWalk_homeWaitingScene
 };
 inline TeaWalk_scene& operator++(TeaWalk_scene& mode, const int){
-        qDebug()<<"Increment prolog SCENE"<<mode;
+        qDebug()<<"Increment TeaWalk SCENE"<<mode;
         mode = static_cast<TeaWalk_scene>((mode + 1));
         return mode;
 }
 
 enum zoo_scene{
-    demo
+    ZOO_plans,
+    ZOO_enteredToTheZoo,
+    ZOO_openDayPromo,
+    ZOO_observing,
+    ZOO_elephant,
+    ZOO_lion,
+    ZOO_birds,
+    ZOO_director,
+    ZOO_directorLoveAnimals,
+    ZOO_directoroveMonkeys,
+    ZOO_animalsObserving,
+    ZOO_aroundWall,
+    ZOO_TrollyIntro,
+    ZOO_PollyLollYTrollyCompany,
+    ZOO_3SSheepName,
+    ZOO_Summary
 };
+inline zoo_scene& operator++(zoo_scene& mode, const int){
+        qDebug()<<"Increment zoo_scene SCENE"<<mode;
+        mode = static_cast<zoo_scene>((mode + 1));
+        return mode;
+}
 
+enum voyage_scene{
+    voyage_packSuitcase,
+    voyage_packSuitcaseDescription,
+    voyaje_PollyPack,
+    voyage_PollyPackItems,
+    voyage_LollyPack,
+    voyage_LollyPackItems,
+    voyage_TrollyPack,
+    voyage_TrollyPackItems
+};
+inline voyage_scene& operator++(voyage_scene& mode, const int){
+        qDebug()<<"Increment voyage_scene SCENE"<<mode;
+        mode = static_cast<voyage_scene>((mode + 1));
+        return mode;
+}
 #endif // LEVEL_H

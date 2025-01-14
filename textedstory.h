@@ -18,6 +18,16 @@ public:
     static QString getTeaWalkText(int row){
         return teaWalkText.at(row);
     }
+
+    static QStringList zooText;
+    static QString getZooText(int row){
+        return zooText.at(row);
+    }
+
+    static QStringList voyageText;
+    static QString getVoyageText(int row){
+        return voyageText.at(row);
+    }
 };
 
 QStringList textedStory::prologText=QStringList({"Однажды Polly по травке на поле гуляла",
@@ -36,23 +46,54 @@ QStringList textedStory::prologText=QStringList({"Однажды Polly по тр
 
 QStringList textedStory::teaWalkText=QStringList({"Polly и Lolly на поле гуляли",
                                                  "Polly и Lolly развлечений искали",
-                                                 "На поле этом Polly и Molly \nмонетку нашли",
-                                                 "Polly и Lolly в кафе чай \nпить пошли",
+                                                 "На поле Polly и Molly монетку нашли",
+                                                 "Polly и Lolly в кафе чай пить пошли",
                                                  "",
-                                                 "Когда Polly и Lolly к \nкафе пришли",
+                                                 "Когда Polly и Lolly к кафе пришли",
                                                  "Они еще монетку нашли",
                                                  "",
                                                  "У жирафа они чай заказали",
                                                  "Одну монетку жирафу отдали",
                                                  "",
                                                  "Когда чай принесли",
-                                                 "К окну Polly и Lolly чай \nпить пошли",
+                                                 "К окну Polly и Lolly чай пить пошли",
                                                  "Чай допивали",
                                                  "Второй чай заказали",
                                                  "",
-                                                 "Когда весь чай в кафе \nповыпивали",
+                                                 "Когда весь чай в кафе повыпивали",
                                                  "Polly и Lolly домой поскакали",
                                                  "",
                                                  "Ведь их дома уже ждали!"});
+
+QStringList textedStory::zooText=QStringList({"Polly и Molly в поход пошли",
+                                             "По пути в зоопарк зашли",
+                                             "В этот день в зоопарк \nбез билетов пускали",
+                                             "Polly и Lolly за животными наблюдали",
+                                             "",
+                                             "В зоопарке были слоны",
+                                             "В зоопарке были львы",
+                                             "В зоопарке били стрижи",
+                                             "В этот день в зоопарке был директор",
+                                             "",
+                                             "Директор животных любил",
+                                             "Мартышек директор бананом кормил",
+                                             "",
+                                             "За многими животными они наблюдали",
+                                             "Около длинного забора собрата повстречали",
+                                             "Они из вальера сбежавшую овечку нашли",
+                                             "И дальше по миру вместе пошли",
+                                             "",
+                                             "Третьей овчечке дали имя Trolly.",
+                                             "A из зоопарка в тот день \nи так выпускали"});
+
+QStringList textedStory::voyageText=QStringList({"Polly, Lolly и Trolly паковали чемоданы",
+                                                "Через неделю они в теплые страны улетали",
+                                                "",
+                                                "Polly в путешествие хорошо собралась",
+                                                "Взяла карту и компас, но забыла очки",
+                                                "Lolly взяла для Polly очки",
+                                                "Но забыла взять все остальное",
+                                                "Trolly в поездку дольше всех собиралась",
+                                                "А взяла с собой только Polly и Molly."});
 }
 #endif // TEXTEDSTORY_H
